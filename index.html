@@ -6,17 +6,11 @@
 <title>TechCore Assistência</title>
 
 <style>
-
 body{
     margin:0;
     font-family:'Segoe UI',sans-serif;
-
-    background:
-    linear-gradient(rgba(2,6,23,0.95), rgba(2,6,23,0.95)),
-    url('logo.png') center no-repeat;
-
-    background-size: 700px;
-    background-attachment: fixed;
+    background:linear-gradient(rgba(2,6,23,0.95), rgba(2,6,23,0.95)), url('logo.png') center no-repeat;
+    background-size:700px;
     color:white;
 }
 
@@ -33,61 +27,47 @@ header{
     border-radius:50%;
     overflow:hidden;
     border:3px solid #3b82f6;
-    box-shadow:0 0 25px rgba(59,130,246,0.8);
 }
 
 .logo-circle img{
     width:100%;
-    height:100%;
 }
 
 .btn{
-    background:linear-gradient(90deg,#22c55e,#16a34a);
-    padding:12px 18px;
+    background:#22c55e;
+    padding:10px 15px;
     border-radius:8px;
     color:white;
     text-decoration:none;
-    font-weight:bold;
 }
 
 .container{
     max-width:500px;
     margin:20px auto;
     background:#1e293b;
-    padding:25px;
-    border-radius:18px;
+    padding:20px;
+    border-radius:15px;
 }
 
 .check{
     display:flex;
     align-items:center;
-    gap:12px;
-    padding:12px;
-    border-radius:10px;
+    gap:10px;
     background:#020617;
-    margin:6px 0;
+    padding:10px;
+    border-radius:8px;
+    margin:5px 0;
 }
 
 .check input{
-    display:none;
-}
-
-.check-custom{
-    width:20px;
-    height:20px;
-    border-radius:6px;
-    border:2px solid #64748b;
-}
-
-.check input:checked + .check-custom{
-    background:#3b82f6;
+    transform:scale(1.2);
 }
 
 input,select{
     width:100%;
-    padding:12px;
-    margin:8px 0;
-    border-radius:10px;
+    padding:10px;
+    margin:5px 0;
+    border-radius:8px;
     border:none;
     background:#020617;
     color:white;
@@ -95,10 +75,10 @@ input,select{
 
 button{
     width:100%;
-    padding:14px;
+    padding:12px;
     margin-top:10px;
     border:none;
-    border-radius:10px;
+    border-radius:8px;
     background:#3b82f6;
     color:white;
     font-weight:bold;
@@ -106,11 +86,10 @@ button{
 
 .result{
     text-align:center;
-    font-size:22px;
     margin-top:10px;
+    font-size:20px;
     color:#22c55e;
 }
-
 </style>
 </head>
 
@@ -129,70 +108,65 @@ button{
 
 <label class="check">
 <input type="checkbox" value="140" data-name="Formatação sem backup">
-<div class="check-custom"></div>
 <span>Formatação sem backup (R$140)</span>
 </label>
 
 <label class="check">
 <input type="checkbox" value="190" data-name="Formatação com backup">
-<div class="check-custom"></div>
 <span>Formatação com backup (R$190)</span>
 </label>
 
 <label class="check">
 <input type="checkbox" value="680" data-name="Troca de tela">
-<div class="check-custom"></div>
 <span>Troca de tela (R$680)</span>
 </label>
 
 <label class="check">
 <input type="checkbox" value="120" data-name="Diagnóstico">
-<div class="check-custom"></div>
 <span>Diagnóstico (R$120)</span>
 </label>
 
 <label class="check">
-<input type="checkbox" value="490" data-name="Troca do teclado modelo embutido (interno)">
-<div class="check-custom"></div>
-<span>Troca do teclado modelo embutido (interno) (R$490)</span>
+<input type="checkbox" value="490" data-name="Teclado embutido">
+<span>Troca teclado embutido (R$490)</span>
 </label>
 
 <label class="check">
-<input type="checkbox" value="160" data-name="Limpeza interna + troca de pasta térmica">
-<div class="check-custom"></div>
-<span>Limpeza interna + troca de pasta térmica (R$160)</span>
+<input type="checkbox" value="160" data-name="Limpeza + pasta térmica">
+<span>Limpeza + pasta térmica (R$160)</span>
+</label>
+
+<h3>Reparo de carcaça</h3>
+
+<label class="check">
+<input type="checkbox" id="carcacaCheck">
+<span>Reparo de carcaça (valor automático)</span>
 </label>
 
 <h3>Notebook</h3>
 <input id="marca" placeholder="Marca">
 
-<h3>Processador</h3>
-
-<select id="cpuTipo" onchange="liberarGeracao()">
-<option value="">Selecione o processador</option>
+<select id="cpuTipo">
+<option value="">Processador</option>
 <option value="i3">Intel i3</option>
 <option value="i5">Intel i5</option>
 <option value="i7">Intel i7</option>
 </select>
 
-<select id="cpuGeracao" disabled>
-<option value="">Selecione a geração</option>
-<option value="2">2ª geração</option>
-<option value="3">3ª geração</option>
-<option value="4">4ª geração</option>
-<option value="6">6ª geração</option>
-<option value="7">7ª geração</option>
-<option value="8">8ª geração</option>
-<option value="9">9ª geração</option>
-<option value="10">10ª geração</option>
-<option value="11">11ª geração ou superior</option>
+<select id="cpuGeracao">
+<option value="">Geração</option>
+<option value="2">2ª</option>
+<option value="3">3ª</option>
+<option value="4">4ª</option>
+<option value="6">6ª</option>
+<option value="7">7ª</option>
+<option value="8">8ª</option>
+<option value="9">9ª</option>
+<option value="10">10ª</option>
+<option value="11">11+</option>
 </select>
 
-<p style="color:#f87171;font-size:13px">
-⚠️ A informação do processador interfere diretamente no orçamento
-</p>
-
-<button id="btnOrcamento" onclick="calcular()" disabled>Gerar orçamento</button>
+<button onclick="calcular()">Gerar orçamento</button>
 
 <div class="result" id="total">Total: R$ 0</div>
 
@@ -209,86 +183,67 @@ button{
 
 <script>
 
-function liberarGeracao(){
-if(document.getElementById('cpuTipo').value){
-document.getElementById('cpuGeracao').disabled=false;
-}
-}
-
-document.getElementById('cpuGeracao').addEventListener('change',function(){
-if(this.value){
-document.getElementById('btnOrcamento').disabled=false;
-}
-});
-
 function calcular(){
 
-let marca=document.getElementById('marca').value;
-let tipo=document.getElementById('cpuTipo').value;
-let geracao=parseInt(document.getElementById('cpuGeracao').value);
+let geracao = parseInt(document.getElementById('cpuGeracao').value);
 
-if(!marca||!tipo||!geracao){
-alert("Preencha todos os dados");
+if(!geracao){
+alert("Selecione a geração");
 return;
 }
 
-let total=0;
+let total = 0;
 
-document.querySelectorAll('input[type=checkbox]:checked').forEach(el=>{
-total+=parseInt(el.value);
+// soma serviços
+document.querySelectorAll('input[type=checkbox]').forEach(el=>{
+if(el.checked && el.value){
+total += parseInt(el.value);
+}
 });
 
-let valorCarcaca=0;
+// carcaça automática
+let valorCarcaca = 0;
 
-if(geracao<=6) valorCarcaca=460;
-else if(geracao<=10) valorCarcaca=580;
-else valorCarcaca=650;
+if(document.getElementById('carcacaCheck').checked){
 
-total+=valorCarcaca;
+if(geracao <= 6) valorCarcaca = 460;
+else if(geracao <= 10) valorCarcaca = 580;
+else valorCarcaca = 650;
 
-document.getElementById('total').innerText="Total: R$ "+total;
+total += valorCarcaca;
+}
+
+document.getElementById('total').innerText = "Total: R$ " + total;
 }
 
 function enviar(){
 
-let marca=document.getElementById('marca').value;
-let tipo=document.getElementById('cpuTipo').value;
-let geracao=parseInt(document.getElementById('cpuGeracao').value);
+let geracao = parseInt(document.getElementById('cpuGeracao').value);
 
-let nome=document.getElementById('nome').value;
-let bairro=document.getElementById('bairro').value;
-let contato=document.getElementById('contato').value;
-let horario=document.getElementById('horario').value;
+let valorCarcaca = 0;
+
+if(geracao <= 6) valorCarcaca = 460;
+else if(geracao <= 10) valorCarcaca = 580;
+else valorCarcaca = 650;
 
 let servicos=[];
 
-document.querySelectorAll('input[type=checkbox]:checked').forEach(el=>{
+document.querySelectorAll('input[type=checkbox]').forEach(el=>{
+if(el.checked && el.dataset.name){
 servicos.push(el.dataset.name+" R$"+el.value);
+}
 });
 
-let valorCarcaca=0;
-
-if(geracao<=6) valorCarcaca=460;
-else if(geracao<=10) valorCarcaca=580;
-else valorCarcaca=650;
-
+if(document.getElementById('carcacaCheck').checked){
 servicos.push("Reparo de carcaça R$"+valorCarcaca);
-
-let total=document.getElementById('total').innerText;
+}
 
 let msg=`Olá, quero fazer o serviço
-
-Cliente: ${nome}
-Bairro: ${bairro}
-Contato: ${contato}
-Horário: ${horario}
-
-Notebook: ${marca} ${tipo} ${geracao}ª geração
 
 Serviços:
 ${servicos.join("\\n")}
 
-${total}`;
+${document.getElementById('total').innerText}`;
 
 window.open("https://wa.me/5549991204177?text="+encodeURIComponent(msg));
 
