@@ -6,119 +6,157 @@
 <title>TechCore Assistência</title>
 
 <style>
+
 body{
     margin:0;
-    font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(135deg,#020617,#0f172a);
+    font-family:'Segoe UI',sans-serif;
+
+    background:
+    linear-gradient(rgba(2,6,23,0.96), rgba(2,6,23,0.96)),
+    url('logo.png') no-repeat center;
+
+    background-size: 500px;
+    background-attachment: fixed;
     color:white;
 }
 
+/* HEADER */
 header{
     display:flex;
     justify-content:space-between;
-    padding:20px 30px;
     align-items:center;
+    padding:20px;
 }
 
-.logo{
-    font-size:20px;
-    font-weight:bold;
+.logo-circle{
+    width:80px;
+    height:80px;
+    border-radius:50%;
+    overflow:hidden;
+    border:3px solid #3b82f6;
+    box-shadow:0 0 25px rgba(59,130,246,0.8);
+    animation:pulse 2s infinite;
 }
 
+.logo-circle img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+@keyframes pulse{
+    0%{box-shadow:0 0 0 rgba(59,130,246,0.7);}
+    50%{box-shadow:0 0 25px rgba(59,130,246,1);}
+    100%{box-shadow:0 0 0 rgba(59,130,246,0.7);}
+}
+
+/* BOTÃO WHATS */
 .btn{
-    background:#22c55e;
-    padding:10px 15px;
+    background:linear-gradient(90deg,#22c55e,#16a34a);
+    padding:12px 18px;
     border-radius:8px;
     color:white;
     text-decoration:none;
+    font-weight:bold;
+    animation:btnPulse 2s infinite;
 }
 
+@keyframes btnPulse{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.05);}
+    100%{transform:scale(1);}
+}
+
+/* CARD */
 .container{
-    max-width:450px;
+    max-width:480px;
     margin:20px auto;
     background:#1e293b;
-    padding:20px;
-    border-radius:16px;
+    padding:25px;
+    border-radius:18px;
+    box-shadow:0 0 40px rgba(0,0,0,0.7);
 }
 
+/* CHECKBOX PREMIUM */
 .check{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  padding:12px;
-  border-radius:10px;
-  background:#0f172a;
-  border:1px solid transparent;
-  transition:0.2s;
-  cursor:pointer;
-  margin:6px 0;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:12px;
+    border-radius:10px;
+    background:#020617;
+    margin:6px 0;
+    cursor:pointer;
+    transition:0.2s;
 }
 
 .check:hover{
-  background:#1e293b;
-  border-color:#3b82f6;
+    border:1px solid #3b82f6;
+    transform:scale(1.02);
 }
 
 .check input{
-  display:none;
+    display:none;
 }
 
 .check-custom{
-  width:20px;
-  height:20px;
-  border-radius:6px;
-  border:2px solid #64748b;
+    width:20px;
+    height:20px;
+    border-radius:6px;
+    border:2px solid #64748b;
 }
 
 .check input:checked + .check-custom{
-  background:#3b82f6;
-  border-color:#3b82f6;
-}
-
-.check input:checked + .check-custom::after{
-  content:"✔";
-  color:white;
-  font-size:12px;
-  position:relative;
-  left:4px;
-}
-
-.check input:checked ~ span{
-  color:#60a5fa;
-  font-weight:bold;
+    background:#3b82f6;
 }
 
 input,select{
     width:100%;
     padding:12px;
     margin:8px 0;
-    border-radius:8px;
+    border-radius:10px;
     border:none;
+    background:#020617;
+    color:white;
 }
 
+/* BOTÕES */
 button{
     width:100%;
     padding:14px;
     margin-top:10px;
     border:none;
-    border-radius:8px;
-    background:#3b82f6;
+    border-radius:10px;
+    background:linear-gradient(90deg,#3b82f6,#2563eb);
     color:white;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.2s;
+}
+
+button:hover{
+    transform:scale(1.03);
+}
+
+/* TOTAL ANIMADO */
+.result{
+    text-align:center;
+    font-size:22px;
+    margin-top:10px;
+    color:#22c55e;
     font-weight:bold;
 }
 
-.result{
-    text-align:center;
-    font-size:20px;
-    margin-top:10px;
-}
 </style>
 </head>
 
 <body>
 
 <header>
-<div class="logo">TechCore Assistência</div>
+<div class="logo-circle">
+<img src="logo.png">
+</div>
+
 <a class="btn" href="https://wa.me/5549991204177">WhatsApp</a>
 </header>
 
@@ -150,16 +188,33 @@ button{
 <span>Diagnóstico (R$120)</span>
 </label>
 
+<label class="check">
+<input type="checkbox" value="490" data-name="Teclado embutido">
+<div class="check-custom"></div>
+<span>Teclado embutido (R$490)</span>
+</label>
+
+<label class="check">
+<input type="checkbox" value="180" data-name="Limpeza interna">
+<div class="check-custom"></div>
+<span>Limpeza interna (R$180)</span>
+</label>
+
+<label class="check">
+<input type="checkbox" value="280" data-name="Manutenção corretiva">
+<div class="check-custom"></div>
+<span>Manutenção corretiva (R$280)</span>
+</label>
+
 <h3>Reparo de carcaça</h3>
 
 <select id="carcaca">
 <option value="0">Nenhum</option>
-<option value="490">Reparo leve (R$490) - "moldura abrindo, dobradiça solta, carcaça abrindo"</option>
-<option value="580">Reparo estrutural (R$580) - "moldura aberta, base danificada, dobradiças danificadas, entre outros"</option>
-<option value="avaliacao">Troca de peça (avaliação)</option>
+<option value="490">Reparo leve</option>
+<option value="580">Reparo estrutural</option>
+<option value="avaliacao">Troca de peça</option>
 </select>
 
-<h3>Notebook</h3>
 <input id="marca" placeholder="Marca">
 <input id="proc" placeholder="Processador">
 
@@ -169,17 +224,17 @@ button{
 
 <hr>
 
-<h3>Seus dados</h3>
 <input id="nome" placeholder="Nome">
 <input id="bairro" placeholder="Bairro">
 <input id="contato" placeholder="WhatsApp">
-<input id="horario" placeholder="Horário para retirada">
+<input id="horario" placeholder="Horário">
 
 <button onclick="enviar()">Quero fazer o serviço</button>
 
 </div>
 
 <script>
+
 function calcular(){
 let total=0;
 
@@ -194,12 +249,14 @@ document.getElementById('total').innerText="Total: R$ "+total;
 }
 
 function enviar(){
-let marca=document.getElementById('marca').value;
-let proc=document.getElementById('proc').value;
+
 let nome=document.getElementById('nome').value;
 let bairro=document.getElementById('bairro').value;
 let contato=document.getElementById('contato').value;
 let horario=document.getElementById('horario').value;
+
+let marca=document.getElementById('marca').value;
+let proc=document.getElementById('proc').value;
 
 let servicos=[];
 
@@ -207,12 +264,7 @@ document.querySelectorAll('input[type=checkbox]:checked').forEach(el=>{
 servicos.push(el.dataset.name+" R$"+el.value);
 });
 
-let c=document.getElementById('carcaca').value;
-if(c=="490") servicos.push("Reparo leve R$490");
-if(c=="580") servicos.push("Reparo estrutural R$580");
-if(c=="avaliacao") servicos.push("Troca de peça (avaliar)");
-
-let msg=`Olá, quero fazer o serviço.
+let msg=`Olá, quero fazer o serviço
 
 Cliente: ${nome}
 Bairro: ${bairro}
@@ -222,12 +274,14 @@ Horário: ${horario}
 Notebook: ${marca} ${proc}
 
 Serviços:
-${servicos.join("\n")}
+${servicos.join("\\n")}
 
 ${document.getElementById('total').innerText}`;
 
 window.open("https://wa.me/5549991204177?text="+encodeURIComponent(msg));
+
 }
+
 </script>
 
 </body>
