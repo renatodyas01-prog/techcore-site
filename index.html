@@ -20,7 +20,6 @@ body{
     color:white;
 }
 
-/* TOPO */
 header{
     display:flex;
     justify-content:space-between;
@@ -51,7 +50,6 @@ header{
     font-weight:bold;
 }
 
-/* CARD */
 .container{
     max-width:500px;
     margin:20px auto;
@@ -60,7 +58,6 @@ header{
     border-radius:18px;
 }
 
-/* CHECKBOX */
 .check{
     display:flex;
     align-items:center;
@@ -86,7 +83,6 @@ header{
     background:#3b82f6;
 }
 
-/* INPUTS */
 input,select{
     width:100%;
     padding:12px;
@@ -97,7 +93,6 @@ input,select{
     color:white;
 }
 
-/* BOTÕES */
 button{
     width:100%;
     padding:14px;
@@ -109,7 +104,6 @@ button{
     font-weight:bold;
 }
 
-/* TOTAL */
 .result{
     text-align:center;
     font-size:22px;
@@ -126,7 +120,6 @@ button{
 <div class="logo-circle">
 <img src="logo.png">
 </div>
-
 <a class="btn" href="https://wa.me/5549991204177">WhatsApp</a>
 </header>
 
@@ -196,7 +189,7 @@ button{
 </select>
 
 <p style="color:#f87171;font-size:13px">
-⚠️ A informação do processador interfere diretamente no orçamento e deve estar correta
+⚠️ A informação do processador interfere diretamente no orçamento
 </p>
 
 <button id="btnOrcamento" onclick="calcular()" disabled>Gerar orçamento</button>
@@ -217,25 +210,24 @@ button{
 <script>
 
 function liberarGeracao(){
-let tipo = document.getElementById('cpuTipo').value;
-if(tipo){
-document.getElementById('cpuGeracao').disabled = false;
+if(document.getElementById('cpuTipo').value){
+document.getElementById('cpuGeracao').disabled=false;
 }
 }
 
-document.getElementById('cpuGeracao').addEventListener('change', function(){
+document.getElementById('cpuGeracao').addEventListener('change',function(){
 if(this.value){
-document.getElementById('btnOrcamento').disabled = false;
+document.getElementById('btnOrcamento').disabled=false;
 }
 });
 
 function calcular(){
 
-let marca = document.getElementById('marca').value;
-let tipo = document.getElementById('cpuTipo').value;
-let geracao = parseInt(document.getElementById('cpuGeracao').value);
+let marca=document.getElementById('marca').value;
+let tipo=document.getElementById('cpuTipo').value;
+let geracao=parseInt(document.getElementById('cpuGeracao').value);
 
-if(!marca || !tipo || !geracao){
+if(!marca||!tipo||!geracao){
 alert("Preencha todos os dados");
 return;
 }
@@ -243,26 +235,25 @@ return;
 let total=0;
 
 document.querySelectorAll('input[type=checkbox]:checked').forEach(el=>{
-total += parseInt(el.value);
+total+=parseInt(el.value);
 });
 
-let valorCarcaca = 0;
+let valorCarcaca=0;
 
-if(geracao <= 6) valorCarcaca = 460;
-else if(geracao <= 10) valorCarcaca = 580;
-else valorCarcaca = 650;
+if(geracao<=6) valorCarcaca=460;
+else if(geracao<=10) valorCarcaca=580;
+else valorCarcaca=650;
 
-total += valorCarcaca;
+total+=valorCarcaca;
 
-document.getElementById('total').innerText =
-"Total: R$ " + total;
+document.getElementById('total').innerText="Total: R$ "+total;
 }
 
 function enviar(){
 
 let marca=document.getElementById('marca').value;
 let tipo=document.getElementById('cpuTipo').value;
-let geracao=document.getElementById('cpuGeracao').value;
+let geracao=parseInt(document.getElementById('cpuGeracao').value);
 
 let nome=document.getElementById('nome').value;
 let bairro=document.getElementById('bairro').value;
@@ -275,7 +266,15 @@ document.querySelectorAll('input[type=checkbox]:checked').forEach(el=>{
 servicos.push(el.dataset.name+" R$"+el.value);
 });
 
-let total = document.getElementById('total').innerText;
+let valorCarcaca=0;
+
+if(geracao<=6) valorCarcaca=460;
+else if(geracao<=10) valorCarcaca=580;
+else valorCarcaca=650;
+
+servicos.push("Reparo de carcaça R$"+valorCarcaca);
+
+let total=document.getElementById('total').innerText;
 
 let msg=`Olá, quero fazer o serviço
 
@@ -292,6 +291,7 @@ ${servicos.join("\\n")}
 ${total}`;
 
 window.open("https://wa.me/5549991204177?text="+encodeURIComponent(msg));
+
 }
 
 </script>
