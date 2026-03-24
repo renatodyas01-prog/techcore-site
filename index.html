@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TechCore Assistência</title>
+
+<style>
+body{
+    margin:0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg,#020617,#0f172a);
+    color:white;
+}
+
+header{
+    display:flex;
+    justify-content:space-between;
+    padding:20px 30px;
+    align-items:center;
+}
+
+.logo{
+    font-size:20px;
+    font-weight:bold;
+}
+
+.btn{
+    background:#22c55e;
+    padding:10px 15px;
+    border-radius:8px;
+    color:white;
+    text-decoration:none;
+}
+
+.container{
+    max-width:450px;
+    margin:20px auto;
+    background:#1e293b;
+    padding:20px;
+    border-radius:16px;
+}
+
+.check{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:12px;
+  border-radius:10px;
+  background:#0f172a;
+  border:1px solid transparent;
+  transition:0.2s;
+  cursor:pointer;
+  margin:6px 0;
+}
+
+.check:hover{
+  background:#1e293b;
+  border-color:#3b82f6;
+}
+
+.check input{
+  display:none;
+}
+
+.check-custom{
+  width:20px;
+  height:20px;
+  border-radius:6px;
+  border:2px solid #64748b;
+}
+
+.check input:checked + .check-custom{
+  background:#3b82f6;
+  border-color:#3b82f6;
+}
+
+.check input:checked + .check-custom::after{
+  content:"✔";
+  color:white;
+  font-size:12px;
+  position:relative;
+  left:4px;
+}
+
+.check input:checked ~ span{
+  color:#60a5fa;
+  font-weight:bold;
+}
+
+input,select{
+    width:100%;
+    padding:12px;
+    margin:8px 0;
+    border-radius:8px;
+    border:none;
+}
+
+button{
+    width:100%;
+    padding:14px;
+    margin-top:10px;
+    border:none;
+    border-radius:8px;
+    background:#3b82f6;
+    color:white;
+    font-weight:bold;
+}
+
+.result{
+    text-align:center;
+    font-size:20px;
+    margin-top:10px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="logo">TechCore Assistência</div>
+<a class="btn" href="https://wa.me/5549991204177">WhatsApp</a>
+</header>
+
+<div class="container">
+
+<h3>Serviços</h3>
+
+<label class="check">
+<input type="checkbox" value="140" data-name="Formatação sem backup">
+<div class="check-custom"></div>
+<span>Formatação sem backup (R$140)</span>
+</label>
+
+<label class="check">
+<input type="checkbox" value="190" data-name="Formatação com backup">
+<div class="check-custom"></div>
+<span>Formatação com backup (R$190)</span>
+</label>
+
+<label class="check">
+<input type="checkbox" value="680" data-name="Troca de tela">
+<div class="check-custom"></div>
+<span>Troca de tela (R$680)</span>
+</label>
+
+<label class="check">
+<input type="checkbox" value="120" data-name="Diagnóstico">
+<div class="check-custom"></div>
+<span>Diagnóstico (R$120)</span>
+</label>
+
+<h3>Reparo de carcaça</h3>
+
+<select id="carcaca">
+<option value="0">Nenhum</option>
+<option value="490">Reparo leve (R$490) - "moldura abrindo, dobradiça solta, carcaça abrindo"</option>
+<option value="580">Reparo estrutural (R$580) - "moldura aberta, base danificada, dobradiças danificadas, entre outros"</option>
+<option value="avaliacao">Troca de peça (avaliação)</option>
+</select>
+
+<h3>Notebook</h3>
+<input id="marca" placeholder="Marca">
+<input id="proc" placeholder="Processador">
+
+<button onclick="calcular()">Gerar orçamento</button>
+
+<div class="result" id="total">Total: R$ 0</div>
+
+<hr>
+
+<h3>Seus dados</h3>
+<input id="nome" placeholder="Nome">
+<input id="bairro" placeholder="Bairro">
+<input id="contato" placeholder="WhatsApp">
+<input id="horario" placeholder="Horário para retirada">
+
+<button onclick="enviar()">Quero fazer o serviço</button>
+
+</div>
+
+<script>
+function calcular(){
+let total=0;
+
+document.querySelectorAll('input[type=checkbox]:checked').forEach(el=>{
+total += parseInt(el.value);
+});
+
+let c=document.getElementById('carcaca').value;
+if(c!="avaliacao") total+=parseInt(c);
+
+document.getElementById('total').innerText="Total: R$ "+total;
+}
+
+function enviar(){
+let marca=document.getElementById('marca').value;
+let proc=document.getElementById('proc').value;
+let nome=document.getElementById('nome').value;
+let bairro=document.getElementById('bairro').value;
+let contato=document.getElementById('contato').value;
+let horario=document.getElementById('horario').value;
+
+let servicos=[];
+
+document.querySelectorAll('input[type=checkbox]:checked').forEach(el=>{
+servicos.push(el.dataset.name+" R$"+el.value);
+});
+
+let c=document.getElementById('carcaca').value;
+if(c=="490") servicos.push("Reparo leve R$490");
+if(c=="580") servicos.push("Reparo estrutural R$580");
+if(c=="avaliacao") servicos.push("Troca de peça (avaliar)");
+
+let msg=`Olá, quero fazer o serviço.
+
+Cliente: ${nome}
+Bairro: ${bairro}
+Contato: ${contato}
+Horário: ${horario}
+
+Notebook: ${marca} ${proc}
+
+Serviços:
+${servicos.join("\n")}
+
+${document.getElementById('total').innerText}`;
+
+window.open("https://wa.me/5549991204177?text="+encodeURIComponent(msg));
+}
+</script>
+
+</body>
+</html>
