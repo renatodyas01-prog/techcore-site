@@ -6,19 +6,21 @@
 <title>TechCore Assistência</title>
 
 <style>
+
 body{
     margin:0;
     font-family:'Segoe UI',sans-serif;
 
     background:
-    linear-gradient(rgba(2,6,23,0.96), rgba(2,6,23,0.96)),
-    url('logo.png') no-repeat center;
+    linear-gradient(rgba(2,6,23,0.95), rgba(2,6,23,0.95)),
+    url('logo.png') center no-repeat;
 
-    background-size: 500px;
+    background-size: 700px;
     background-attachment: fixed;
     color:white;
 }
 
+/* TOPO */
 header{
     display:flex;
     justify-content:space-between;
@@ -49,14 +51,16 @@ header{
     font-weight:bold;
 }
 
+/* CARD */
 .container{
-    max-width:480px;
+    max-width:500px;
     margin:20px auto;
     background:#1e293b;
     padding:25px;
     border-radius:18px;
 }
 
+/* CHECKBOX */
 .check{
     display:flex;
     align-items:center;
@@ -82,7 +86,8 @@ header{
     background:#3b82f6;
 }
 
-input{
+/* INPUTS */
+input,select{
     width:100%;
     padding:12px;
     margin:8px 0;
@@ -92,6 +97,7 @@ input{
     color:white;
 }
 
+/* BOTÕES */
 button{
     width:100%;
     padding:14px;
@@ -101,15 +107,16 @@ button{
     background:#3b82f6;
     color:white;
     font-weight:bold;
-    cursor:pointer;
 }
 
+/* TOTAL */
 .result{
     text-align:center;
     font-size:22px;
     margin-top:10px;
     color:#22c55e;
 }
+
 </style>
 </head>
 
@@ -119,6 +126,7 @@ button{
 <div class="logo-circle">
 <img src="logo.png">
 </div>
+
 <a class="btn" href="https://wa.me/5549991204177">WhatsApp</a>
 </header>
 
@@ -162,18 +170,36 @@ button{
 <span>Limpeza interna + troca de pasta térmica (R$160)</span>
 </label>
 
-<h3>Reparo de carcaça</h3>
-<label class="check">
-<input type="checkbox" value="580" data-name="Reparo de carcaça">
-<div class="check-custom"></div>
-<span>Reparo de carcaça (R$580)</span>
-</label>
-
 <h3>Notebook</h3>
 <input id="marca" placeholder="Marca">
-<input id="proc" placeholder="Processador (ex: i5 8ª geração)">
 
-<button onclick="calcular()">Gerar orçamento</button>
+<h3>Processador</h3>
+
+<select id="cpuTipo" onchange="liberarGeracao()">
+<option value="">Selecione o processador</option>
+<option value="i3">Intel i3</option>
+<option value="i5">Intel i5</option>
+<option value="i7">Intel i7</option>
+</select>
+
+<select id="cpuGeracao" disabled>
+<option value="">Selecione a geração</option>
+<option value="2">2ª geração</option>
+<option value="3">3ª geração</option>
+<option value="4">4ª geração</option>
+<option value="6">6ª geração</option>
+<option value="7">7ª geração</option>
+<option value="8">8ª geração</option>
+<option value="9">9ª geração</option>
+<option value="10">10ª geração</option>
+<option value="11">11ª geração ou superior</option>
+</select>
+
+<p style="color:#f87171;font-size:13px">
+⚠️ A informação do processador interfere diretamente no orçamento e deve estar correta
+</p>
+
+<button id="btnOrcamento" onclick="calcular()" disabled>Gerar orçamento</button>
 
 <div class="result" id="total">Total: R$ 0</div>
 
@@ -190,13 +216,27 @@ button{
 
 <script>
 
+function liberarGeracao(){
+let tipo = document.getElementById('cpuTipo').value;
+if(tipo){
+document.getElementById('cpuGeracao').disabled = false;
+}
+}
+
+document.getElementById('cpuGeracao').addEventListener('change', function(){
+if(this.value){
+document.getElementById('btnOrcamento').disabled = false;
+}
+});
+
 function calcular(){
 
 let marca = document.getElementById('marca').value;
-let proc = document.getElementById('proc').value;
+let tipo = document.getElementById('cpuTipo').value;
+let geracao = parseInt(document.getElementById('cpuGeracao').value);
 
-if(!marca || !proc){
-alert("Preencha marca e processador primeiro");
+if(!marca || !tipo || !geracao){
+alert("Preencha todos os dados");
 return;
 }
 
@@ -206,20 +246,24 @@ document.querySelectorAll('input[type=checkbox]:checked').forEach(el=>{
 total += parseInt(el.value);
 });
 
-// DETECTAR GERAÇÃO
-let geracao = parseInt(proc.match(/\\d+/));
+let valorCarcaca = 0;
 
-if(geracao <= 6) total += 450;
-else if(geracao <= 10) total += 490;
-else total += 680;
+if(geracao <= 6) valorCarcaca = 460;
+else if(geracao <= 10) valorCarcaca = 580;
+else valorCarcaca = 650;
 
-document.getElementById('total').innerText="Total: R$ "+total;
+total += valorCarcaca;
+
+document.getElementById('total').innerText =
+"Total: R$ " + total;
 }
 
 function enviar(){
 
 let marca=document.getElementById('marca').value;
-let proc=document.getElementById('proc').value;
+let tipo=document.getElementById('cpuTipo').value;
+let geracao=document.getElementById('cpuGeracao').value;
+
 let nome=document.getElementById('nome').value;
 let bairro=document.getElementById('bairro').value;
 let contato=document.getElementById('contato').value;
@@ -240,9 +284,9 @@ Bairro: ${bairro}
 Contato: ${contato}
 Horário: ${horario}
 
-Notebook: ${marca} ${proc}
+Notebook: ${marca} ${tipo} ${geracao}ª geração
 
-Serviços selecionados:
+Serviços:
 ${servicos.join("\\n")}
 
 ${total}`;
