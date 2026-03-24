@@ -1,255 +1,390 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TechCore Assistência</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TechCore Assistência</title>
 
-<style>
-body{
-    margin:0;
-    font-family:'Segoe UI',sans-serif;
-    background:linear-gradient(rgba(2,6,23,0.95), rgba(2,6,23,0.95)), url('logo.png') center no-repeat;
-    background-size:700px;
-    color:white;
-}
+  <style>
+    *{
+      box-sizing:border-box;
+    }
 
-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:20px;
-}
+    body{
+      margin:0;
+      font-family:Arial, sans-serif;
+      color:#fff;
+      background:
+        linear-gradient(rgba(2,6,23,0.94), rgba(2,6,23,0.94)),
+        url('logo.png') center center no-repeat;
+      background-size: cover;
+      background-attachment: fixed;
+    }
 
-.logo-circle{
-    width:80px;
-    height:80px;
-    border-radius:50%;
-    overflow:hidden;
-    border:3px solid #3b82f6;
-}
+    header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      padding:16px;
+    }
 
-.logo-circle img{
-    width:100%;
-}
+    .logo-circle{
+      width:72px;
+      height:72px;
+      border-radius:50%;
+      overflow:hidden;
+      border:3px solid #3b82f6;
+      box-shadow:0 0 18px rgba(59,130,246,0.55);
+      flex-shrink:0;
+      background:#0b1220;
+    }
 
-.btn{
-    background:#22c55e;
-    padding:10px 15px;
-    border-radius:8px;
-    color:white;
-    text-decoration:none;
-}
+    .logo-circle img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
 
-.container{
-    max-width:500px;
-    margin:20px auto;
-    background:#1e293b;
-    padding:20px;
-    border-radius:15px;
-}
+    .btn-whats{
+      background:#22c55e;
+      color:#fff;
+      text-decoration:none;
+      padding:12px 16px;
+      border-radius:10px;
+      font-weight:bold;
+      white-space:nowrap;
+      flex-shrink:0;
+    }
 
-.check{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    background:#020617;
-    padding:10px;
-    border-radius:8px;
-    margin:5px 0;
-}
+    .container{
+      width:min(100%, 560px);
+      margin:0 auto 24px auto;
+      background:rgba(30,41,59,0.94);
+      border-radius:18px;
+      padding:18px;
+      box-shadow:0 10px 30px rgba(0,0,0,0.35);
+    }
 
-.check input{
-    transform:scale(1.2);
-}
+    h3{
+      margin:16px 0 10px;
+      font-size:18px;
+    }
 
-input,select{
-    width:100%;
-    padding:10px;
-    margin:5px 0;
-    border-radius:8px;
-    border:none;
-    background:#020617;
-    color:white;
-}
+    .obs{
+      margin:8px 0 14px;
+      color:#fca5a5;
+      font-size:13px;
+      line-height:1.4;
+    }
 
-button{
-    width:100%;
-    padding:12px;
-    margin-top:10px;
-    border:none;
-    border-radius:8px;
-    background:#3b82f6;
-    color:white;
-    font-weight:bold;
-}
+    .check{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      width:100%;
+      background:#020617;
+      border:1px solid rgba(255,255,255,0.06);
+      border-radius:14px;
+      padding:14px;
+      margin:8px 0;
+    }
 
-.result{
-    text-align:center;
-    margin-top:10px;
-    font-size:20px;
-    color:#22c55e;
-}
-</style>
+    .check input[type="checkbox"]{
+      width:22px;
+      height:22px;
+      flex-shrink:0;
+      accent-color:#3b82f6;
+      margin:0;
+    }
+
+    .check span{
+      display:block;
+      font-size:16px;
+      line-height:1.35;
+      word-break:break-word;
+    }
+
+    input, select, button{
+      width:100%;
+      border:none;
+      border-radius:12px;
+      padding:14px;
+      margin:8px 0;
+      font-size:16px;
+    }
+
+    input, select{
+      background:#020617;
+      color:#fff;
+    }
+
+    input::placeholder{
+      color:#cbd5e1;
+    }
+
+    button{
+      background:#3b82f6;
+      color:#fff;
+      font-weight:bold;
+      cursor:pointer;
+    }
+
+    button:disabled{
+      background:#64748b;
+      cursor:not-allowed;
+      opacity:0.75;
+    }
+
+    .result{
+      margin-top:10px;
+      text-align:center;
+      font-size:22px;
+      font-weight:bold;
+      color:#22c55e;
+    }
+
+    hr{
+      border:none;
+      border-top:1px solid rgba(255,255,255,0.18);
+      margin:18px 0;
+    }
+
+    @media (max-width: 640px){
+      header{
+        padding:14px;
+      }
+
+      .logo-circle{
+        width:62px;
+        height:62px;
+      }
+
+      .btn-whats{
+        padding:10px 12px;
+        font-size:14px;
+      }
+
+      .container{
+        border-radius:16px 16px 0 0;
+        padding:16px;
+      }
+
+      .check{
+        padding:12px;
+        gap:12px;
+      }
+
+      .check span{
+        font-size:15px;
+      }
+    }
+  </style>
 </head>
-
 <body>
 
-<header>
-<div class="logo-circle">
-<img src="logo.png">
-</div>
-<a class="btn" href="https://wa.me/5549991204177">WhatsApp</a>
-</header>
+  <header>
+    <div class="logo-circle">
+      <img src="logo.png" alt="TechCore Assistência">
+    </div>
 
-<div class="container">
+    <a class="btn-whats" href="https://wa.me/5549991204177" target="_blank">WhatsApp</a>
+  </header>
 
-<h3>Serviços</h3>
+  <div class="container">
 
-<label class="check">
-<input type="checkbox" value="140" data-name="Formatação sem backup">
-<span>Formatação sem backup (R$140)</span>
-</label>
+    <h3>Serviços</h3>
 
-<label class="check">
-<input type="checkbox" value="190" data-name="Formatação com backup">
-<span>Formatação com backup (R$190)</span>
-</label>
+    <label class="check">
+      <input type="checkbox" value="140" data-name="Formatação sem backup">
+      <span>Formatação sem backup (R$140)</span>
+    </label>
 
-<label class="check">
-<input type="checkbox" value="680" data-name="Troca de tela">
-<span>Troca de tela (R$680)</span>
-</label>
+    <label class="check">
+      <input type="checkbox" value="190" data-name="Formatação com backup">
+      <span>Formatação com backup (R$190)</span>
+    </label>
 
-<label class="check">
-<input type="checkbox" value="120" data-name="Diagnóstico">
-<span>Diagnóstico (R$120)</span>
-</label>
+    <label class="check">
+      <input type="checkbox" value="680" data-name="Troca de tela">
+      <span>Troca de tela (R$680)</span>
+    </label>
 
-<label class="check">
-<input type="checkbox" value="490" data-name="Teclado embutido">
-<span>Troca teclado embutido (R$490)</span>
-</label>
+    <label class="check">
+      <input type="checkbox" value="120" data-name="Diagnóstico">
+      <span>Diagnóstico (R$120)</span>
+    </label>
 
-<label class="check">
-<input type="checkbox" value="160" data-name="Limpeza + pasta térmica">
-<span>Limpeza + pasta térmica (R$160)</span>
-</label>
+    <label class="check">
+      <input type="checkbox" value="490" data-name="Troca do teclado modelo embutido (interno)">
+      <span>Troca do teclado modelo embutido (interno) (R$490)</span>
+    </label>
 
-<h3>Reparo de carcaça</h3>
+    <label class="check">
+      <input type="checkbox" value="160" data-name="Limpeza interna + troca de pasta térmica">
+      <span>Limpeza interna + troca de pasta térmica (R$160)</span>
+    </label>
 
-<label class="check">
-<input type="checkbox" id="carcacaCheck">
-<span>Reparo de carcaça (valor automático)</span>
-</label>
+    <h3>Reparo de carcaça</h3>
 
-<h3>Notebook</h3>
-<input id="marca" placeholder="Marca">
+    <label class="check">
+      <input type="checkbox" id="carcacaCheck">
+      <span>Reparo de carcaça (valor automático conforme geração)</span>
+    </label>
 
-<select id="cpuTipo">
-<option value="">Processador</option>
-<option value="i3">Intel i3</option>
-<option value="i5">Intel i5</option>
-<option value="i7">Intel i7</option>
-</select>
+    <h3>Notebook</h3>
+    <input id="marca" placeholder="Marca do notebook">
 
-<select id="cpuGeracao">
-<option value="">Geração</option>
-<option value="2">2ª</option>
-<option value="3">3ª</option>
-<option value="4">4ª</option>
-<option value="6">6ª</option>
-<option value="7">7ª</option>
-<option value="8">8ª</option>
-<option value="9">9ª</option>
-<option value="10">10ª</option>
-<option value="11">11+</option>
-</select>
+    <select id="cpuTipo" onchange="liberarGeracao()">
+      <option value="">Selecione o processador</option>
+      <option value="Intel i3">Intel i3</option>
+      <option value="Intel i5">Intel i5</option>
+      <option value="Intel i7">Intel i7</option>
+    </select>
 
-<button onclick="calcular()">Gerar orçamento</button>
+    <select id="cpuGeracao" disabled>
+      <option value="">Selecione a geração</option>
+      <option value="2">2ª geração</option>
+      <option value="3">3ª geração</option>
+      <option value="4">4ª geração</option>
+      <option value="6">6ª geração</option>
+      <option value="7">7ª geração</option>
+      <option value="8">8ª geração</option>
+      <option value="9">9ª geração</option>
+      <option value="10">10ª geração</option>
+      <option value="11">11ª geração ou superior</option>
+    </select>
 
-<div class="result" id="total">Total: R$ 0</div>
+    <p class="obs">
+      A informação do processador interfere diretamente no orçamento e deve estar correta para o orçamento ser validado.
+    </p>
 
-<hr>
+    <button id="btnOrcamento" onclick="calcular()" disabled>Gerar orçamento</button>
 
-<input id="nome" placeholder="Nome">
-<input id="bairro" placeholder="Bairro">
-<input id="contato" placeholder="WhatsApp">
-<input id="horario" placeholder="Horário">
+    <div class="result" id="total">Total: R$ 0</div>
 
-<button onclick="enviar()">Quero fazer o serviço</button>
+    <hr>
 
-</div>
+    <h3>Seus dados</h3>
+    <input id="nome" placeholder="Nome">
+    <input id="bairro" placeholder="Bairro">
+    <input id="contato" placeholder="WhatsApp">
+    <input id="horario" placeholder="Horário disponível para retirada">
 
-<script>
+    <button onclick="enviar()">Quero fazer o serviço</button>
+  </div>
 
-function calcular(){
+  <script>
+    function liberarGeracao(){
+      const tipo = document.getElementById('cpuTipo').value;
+      const geracao = document.getElementById('cpuGeracao');
+      const btn = document.getElementById('btnOrcamento');
 
-let geracao = parseInt(document.getElementById('cpuGeracao').value);
+      geracao.disabled = !tipo;
 
-if(!geracao){
-alert("Selecione a geração");
-return;
-}
+      if(!tipo){
+        geracao.value = "";
+        btn.disabled = true;
+      }
+    }
 
-let total = 0;
+    document.getElementById('cpuGeracao').addEventListener('change', function(){
+      const marca = document.getElementById('marca').value.trim();
+      const tipo = document.getElementById('cpuTipo').value;
+      const geracao = this.value;
+      document.getElementById('btnOrcamento').disabled = !(marca && tipo && geracao);
+    });
 
-// soma serviços
-document.querySelectorAll('input[type=checkbox]').forEach(el=>{
-if(el.checked && el.value){
-total += parseInt(el.value);
-}
-});
+    document.getElementById('marca').addEventListener('input', function(){
+      const marca = this.value.trim();
+      const tipo = document.getElementById('cpuTipo').value;
+      const geracao = document.getElementById('cpuGeracao').value;
+      document.getElementById('btnOrcamento').disabled = !(marca && tipo && geracao);
+    });
 
-// carcaça automática
-let valorCarcaca = 0;
+    function obterValorCarcaca(geracao){
+      if(geracao <= 6) return 460;
+      if(geracao <= 10) return 580;
+      return 650;
+    }
 
-if(document.getElementById('carcacaCheck').checked){
+    function calcular(){
+      const marca = document.getElementById('marca').value.trim();
+      const tipo = document.getElementById('cpuTipo').value;
+      const geracao = parseInt(document.getElementById('cpuGeracao').value, 10);
 
-if(geracao <= 6) valorCarcaca = 460;
-else if(geracao <= 10) valorCarcaca = 580;
-else valorCarcaca = 650;
+      if(!marca || !tipo || !geracao){
+        alert("Preencha marca, processador e geração.");
+        return;
+      }
 
-total += valorCarcaca;
-}
+      let total = 0;
 
-document.getElementById('total').innerText = "Total: R$ " + total;
-}
+      document.querySelectorAll('.check input[type="checkbox"]').forEach(el => {
+        if(el.checked && el.hasAttribute('value')){
+          total += Number(el.value);
+        }
+      });
 
-function enviar(){
+      if(document.getElementById('carcacaCheck').checked){
+        total += obterValorCarcaca(geracao);
+      }
 
-let geracao = parseInt(document.getElementById('cpuGeracao').value);
+      document.getElementById('total').innerText = "Total: R$ " + total;
+    }
 
-let valorCarcaca = 0;
+    function enviar(){
+      const marca = document.getElementById('marca').value.trim();
+      const tipo = document.getElementById('cpuTipo').value;
+      const geracao = parseInt(document.getElementById('cpuGeracao').value, 10);
 
-if(geracao <= 6) valorCarcaca = 460;
-else if(geracao <= 10) valorCarcaca = 580;
-else valorCarcaca = 650;
+      const nome = document.getElementById('nome').value.trim();
+      const bairro = document.getElementById('bairro').value.trim();
+      const contato = document.getElementById('contato').value.trim();
+      const horario = document.getElementById('horario').value.trim();
 
-let servicos=[];
+      if(!marca || !tipo || !geracao){
+        alert("Preencha marca, processador e geração antes de enviar.");
+        return;
+      }
 
-document.querySelectorAll('input[type=checkbox]').forEach(el=>{
-if(el.checked && el.dataset.name){
-servicos.push(el.dataset.name+" R$"+el.value);
-}
-});
+      const servicos = [];
 
-if(document.getElementById('carcacaCheck').checked){
-servicos.push("Reparo de carcaça R$"+valorCarcaca);
-}
+      document.querySelectorAll('.check input[type="checkbox"]').forEach(el => {
+        if(el.checked && el.dataset.name){
+          servicos.push(el.dataset.name + " R$" + el.value);
+        }
+      });
 
-let msg=`Olá, quero fazer o serviço
+      if(document.getElementById('carcacaCheck').checked){
+        servicos.push("Reparo de carcaça R$" + obterValorCarcaca(geracao));
+      }
+
+      if(servicos.length === 0){
+        alert("Selecione pelo menos um serviço.");
+        return;
+      }
+
+      const total = document.getElementById('total').innerText;
+
+      const msg = `Olá, quero fazer o serviço
+
+Cliente: ${nome}
+Bairro: ${bairro}
+Contato: ${contato}
+Horário: ${horario}
+
+Notebook: ${marca} ${tipo} ${geracao}ª geração
 
 Serviços:
 ${servicos.join("\\n")}
 
-${document.getElementById('total').innerText}`;
+${total}`;
 
-window.open("https://wa.me/5549991204177?text="+encodeURIComponent(msg));
-
-}
-
-</script>
+      window.open("https://wa.me/5549991204177?text=" + encodeURIComponent(msg), "_blank");
+    }
+  </script>
 
 </body>
 </html>
