@@ -1148,15 +1148,11 @@
         const node = el(id);
         if(!node) return;
         node.dataset.url = url || "";
+        node.setAttribute("href", url || "#");
         if(url){
-          node.href = url;
-          node.setAttribute("target", "_blank");
-          node.setAttribute("rel", "noopener");
           node.style.pointerEvents = "auto";
           node.style.opacity = "1";
         }else{
-          node.href = "#";
-          node.removeAttribute("target");
           node.style.pointerEvents = "none";
           node.style.opacity = ".6";
         }
@@ -1678,13 +1674,18 @@
         if(!node || node.dataset.boundClick === "1") return;
         node.dataset.boundClick = "1";
         node.addEventListener("click", (event) => {
-          const url = (node.dataset.url || "").trim();
-          if(!url){
+          const url = (node.dataset.url || node.getAttribute("href") || "").trim();
+          if(!url || url === "#"){
             event.preventDefault();
             return;
           }
           event.preventDefault();
-          window.open(url, "_blank", "noopener");
+          const isMobile = window.innerWidth <= 900 || /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+          if(isMobile){
+            window.location.href = url;
+          }else{
+            window.open(url, "_blank", "noopener");
+          }
         });
       });
     }
